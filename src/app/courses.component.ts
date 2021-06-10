@@ -6,8 +6,9 @@ import { Component } from '@angular/core';
   template: `
     <h1 [ngStyle]="getStyleObj()" [class]="withBorder ? 'with-border' : null">{{ getTitle() }}</h1>
     <ul>
-      <li *ngFor="let course of getCourses()">{{ course }}</li>
+      <li *ngFor="let course of getCourses()" [style.color]="liColor">{{ course }}</li>
     </ul>
+    <button (click)="onClickHideBorderBtn()">{{withBorder ? "Hide" : "Show"}} border</button>
   `,
   styleUrls: ['./courses.component.scss']
 })
@@ -24,6 +25,8 @@ export class CoursesComponent {
     background: `whitesmoke`
   };
 
+  liColor = `blue`;
+
   withBorder = true;
 
   getStyleObj() {
@@ -36,5 +39,13 @@ export class CoursesComponent {
 
   getCourses() {
     return this.courses;
+  }
+
+  setwithBorder(val: boolean) {
+    this.withBorder = val;
+  }
+
+  onClickHideBorderBtn() {
+    this.setwithBorder(!this.withBorder);
   }
 }
